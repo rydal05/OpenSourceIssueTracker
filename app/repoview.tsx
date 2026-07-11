@@ -3,33 +3,42 @@ import { Repository } from "./page";
 import InlinePill from "./components/inlinePill";
 import { getRepoVerbose } from "./ghquery";
 
-export interface Issue {
-    id: number,
-    name: string,
-    description: string,
-    stars: number,
-    url: string,
+export interface DetailedRepo {
+    id: string,
     totalIssuesCount: number,
-    recentIssues: Array<IssueNode>,
-    hasNextIssuesPage: boolean,
-    issuesCursor: string
+    recentIssues: Array<Issue>,
 }
 
-export interface IssueNode {
-    id: number,
+export interface Issue {
+    id: string,
     title: string,
     number: number,
     url: string,
     createdAt: number
 }
 
+const placeholderIssue: Issue = {
+    id: "Loaddin..",
+    title: "loadding",
+    number: -1,
+    url: "google.com",
+    createdAt: -1
+}
+
+const placeholder: DetailedRepo = {
+    id: "Loading...",
+    totalIssuesCount: -1,
+    recentIssues: [placeholderIssue],
+}
+
 export default function RepoView({ curRepo }: { curRepo: Repository }) {
-    const [activeSection, setActiveSection] = useState<string | null>(null);
+    const [activeSection, setActiveSection] = useState<string | null>("Issues");
+    const [repoDetails, setRepoDetails] = useState(placeholder);
     
-    const repoDetails = useMemo(() => {
+    useEffect(() => {
         if(curRepo.id != "")
-            getRepoVerbose(curRepo.id);
-    }, [curRepo])
+            getRepoVerbose(curRepo.id).then((res) => setRepoDetails(res));
+    }, [repoDetails, setRepoDetails, curRepo])
 
     const openSection = (section: string) => {
         setActiveSection(section)
@@ -54,15 +63,19 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
                 )}
             </div>
 
-            <div className="flex flex-row justify-between pt-6 text-slate-500 border-b-1 border-slate-300 pb-1">
+            <div className="flex flex-row justify-between pt-6 text-slate-500 border-b-1 border-slate-300 pb-1 mb-6">
                 <button className="cursor-pointer" onClick={() => openSection("Issues")}>View Issues ⏷</button>
                 <button onClick={() => openSection("PRs")}>View PRs ⏷</button>
                 <button onClick={() => openSection("Codebase")}>View Codebase ⏷</button>
             </div>
 
             {activeSection === "Issues" && (
-                <div className="section">
-                    {}
+                <div className="grid grid-cols-3 gap-6">
+                    {repoDetails.recentIssues.map((issue) => 
+                        <div key={issue.number} className="border-1 rounded-md px-5 py-2">
+                            <h3 className="">{issue.title}</h3>
+                        </div>
+                    )}
                 </div>
             )}
 
