@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import RepoView from "./repoview";
 import Sidebar from "./sidebar";
 import { getPopularRepos } from "./ghquery";
@@ -53,6 +53,7 @@ const defaultRepo: Repository = {
 export default function Home() {
   const [repoList, setRepoList] = useState([defaultRepo]);
   const [curRepo, setCurRepo] = useState(defaultRepo);
+  const [searchTerms, setSearch] = useState([""]);
 
   // call github api here to fill repos array
   useEffect(() => {
@@ -60,12 +61,48 @@ export default function Home() {
       setRepoList(res);
       setCurRepo(res[0]);
     });
-  }, [setRepoList, setCurRepo])
+  }, [setRepoList, setCurRepo]);
+
+
+  const searchFilter = (repo: Repository) => {
+
+    // for all of the search terms,
+    for (const term of searchTerms) {
+      let good = false;
+
+      // if the search term is included in the repo's languages,
+      for(const node of repo.languages.nodes) {
+        if(node.name.includes(term)){
+          // the term is valid, move on to next term
+          good = true;
+          break;
+        }
+      }
+      if (good) continue;
+
+      // if the term is included in the repo's topics,
+      for(const t of repo.repositoryTopics.nodes) {
+        if(t.topic.name.includes(term)){
+          // the term is valid, move on to next term
+          good = true;
+          break;
+        }
+      }
+      if (good) continue;
+
+      // if any term is invalid, remove repo from list
+      return false;
+    }
+
+    return true;
+  }
+
+  const filteredRepos = useMemo(() => repoList.filter(searchFilter), [repoList, searchTerms]);
   
   return (
     <div className="flex flex-row flex-1 bg-zinc-50 font-sans dark:bg-black">
       {/* sidebar */}
-      <Sidebar setCurRepo={setCurRepo} repoList={repoList}/>
+      <Sidebar setCurRepo={setCurRepo} repoList={filteredRepos} setSearch={setSearch}/>
 
       {/* project view */}
       <RepoView curRepo={curRepo}/>

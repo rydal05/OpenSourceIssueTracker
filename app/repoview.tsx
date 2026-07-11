@@ -5,8 +5,6 @@ import InlinePill from "./components/inlinePill";
 export default function RepoView({ curRepo }: { curRepo: Repository }) {
     const [activeSection, setActiveSection] = useState<string | null>(null);
 
-    console.log(curRepo.repositoryTopics);
-
     const openSection = (section: string) => {
         setActiveSection(section)
     };
