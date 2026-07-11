@@ -24,3 +24,5 @@ So we have created a web app that aggregates popular open source repos that allo
 2. Github oauth login (starring projects through the app stars them on their account in github)
 3. LLM chatbot feature to find projects 
 4. save/follow repos
+
+![Design is modeled after Jira](https://images.ctfassets.net/zsv3d0ugroxu/2umofziJhIf3zcHVQjDbTi/86232e7d8050e298ebb500291871a518/Jira_-_feature_overview_-_Jira_only.png)
