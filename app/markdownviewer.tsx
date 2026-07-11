@@ -63,7 +63,7 @@ export default function GitHubMarkDown({ curRepo }: { curRepo: Repository }) {
     return (
         <div>
             <article 
-                className="w-full max-w-full overflow-scroll h-250"
+                className="overflow-scroll h-250"
                 dangerouslySetInnerHTML={{ __html: htmlContent }} 
             />
         </div>

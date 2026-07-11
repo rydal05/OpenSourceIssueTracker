@@ -126,7 +126,10 @@ export default function Home() {
         {/* project view */}
         <RepoView curRepo={curRepo}/>        
       </div>
-      <GitHubMarkDown curRepo={curRepo}/>
+
+      <div className="border-1 rounded-3xl mx-3 my-20 p-3 overflow-hidden h-250">
+        <GitHubMarkDown curRepo={curRepo}/>
+      </div>
     </div>
   );
 }
