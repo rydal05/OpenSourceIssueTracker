@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { Repository } from "./page";
 import InlinePill from "./components/inlinePill";
 import { getRepoVerbose } from "./ghquery";
+import { title } from "process";
 
 export interface DetailedRepo {
     id: string,
@@ -14,15 +15,15 @@ export interface Issue {
     title: string,
     number: number,
     url: string,
-    createdAt: number
+    createdAt: string 
 }
 
 const placeholderIssue: Issue = {
     id: "Loaddin..",
-    title: "loadding",
+    title: "Loading...",
     number: -1,
     url: "google.com",
-    createdAt: -1
+    createdAt: ""
 }
 
 const placeholder: DetailedRepo = {
@@ -36,9 +37,10 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
     const [repoDetails, setRepoDetails] = useState(placeholder);
     
     useEffect(() => {
+        setRepoDetails(placeholder);
         if(curRepo.id != "")
             getRepoVerbose(curRepo.id).then((res) => setRepoDetails(res));
-    }, [repoDetails, setRepoDetails, curRepo])
+    }, [setRepoDetails, curRepo])
 
     const openSection = (section: string) => {
         setActiveSection(section)
@@ -70,12 +72,16 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
             </div>
 
             {activeSection === "Issues" && (
-                <div className="grid grid-cols-3 gap-6">
-                    {repoDetails.recentIssues.map((issue) => 
-                        <div key={issue.number} className="border-1 rounded-md px-5 py-2">
+                <div className="grid grid-cols-3 gap-6 overflow-scroll h-220">
+                    {repoDetails.recentIssues.map((issue) => {
+                        const createdDate = new Date(issue.createdAt);
+                        return (<a key={issue.number} href={issue.url} className="border-1 rounded-md px-5 py-2">
                             <h3 className="">{issue.title}</h3>
-                        </div>
-                    )}
+                            <div className="pt-2 pb-1">
+                                <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`}/>
+                            </div>
+                        </a>)
+                    })}
                 </div>
             )}
 
