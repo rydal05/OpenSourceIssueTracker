@@ -1,8 +1,12 @@
 import SidebarEntry from "./components/sidebarentry";
 import { Repository } from "./page";
 
-export default function Sidebar({repoList, setCurRepo}: 
-        {repoList: Array<Repository>, setCurRepo: React.Dispatch<React.SetStateAction<Repository>>}) {
+interface SideBarProps {
+  repoList: Array<Repository>, 
+  setCurRepo: React.Dispatch<React.SetStateAction<Repository>>, 
+}
+
+export default function Sidebar({repoList, setCurRepo}: SideBarProps){
     return (
       <div className="flex-none w-sm text-lg items-center py-16 mx-2 px-5 bg-white dark:bg-black sm:items-start">
         <div className="flex flex-col">
