@@ -13,12 +13,18 @@ export interface Repository {
   url: string,
   totalIssues: number,
   totalPRs: number,
-  tags: Array<string>,
-  topics: Array<string>,
   languages: Array<string>,
   archived: boolean
   stars: number,
-  repositoryTopics: Array<string>
+  repositoryTopics: {
+    nodes: Array<Topic>
+  }
+}
+
+export interface Topic {
+  topic: {
+    name: string
+  }
 }
 
 const defaultRepo: Repository = {
@@ -28,12 +34,12 @@ const defaultRepo: Repository = {
   totalIssues: -1,
   totalPRs: -1,
   stars: -1,
-  tags: [],
-  topics: [],
   languages: [],
   archived: false,
   owner: "NIL",
-  repositoryTopics: []
+  repositoryTopics: {
+    nodes: []
+  }
 };
 
 export default function Home() {
