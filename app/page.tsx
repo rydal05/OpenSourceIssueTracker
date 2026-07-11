@@ -16,6 +16,7 @@ export interface Repository {
   languages: Array<string>,
   archived: boolean
   stars: number,
+  repositoryTopics: Array<string>
 }
 
 const defaultRepo: Repository = {
@@ -28,7 +29,8 @@ const defaultRepo: Repository = {
   topics: [],
   languages: [],
   archived: false,
-  owner: "NIL"
+  owner: "NIL",
+  repositoryTopics: []
 };
 
 export default function Home() {

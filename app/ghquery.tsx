@@ -16,6 +16,8 @@ export async function getPopularRepos() {
                         description
                         url
                         isArchived
+                        
+
                         languages(first: 3, orderBy: {field: SIZE, direction: DESC}) {
                             nodes {
                                 name
@@ -26,6 +28,14 @@ export async function getPopularRepos() {
                         }
                         openPRs: pullRequests(states: OPEN){
                             totalCount
+                        }
+
+                        repositoryTopics(first: 10) {
+                            nodes {
+                                topic {
+                                    name
+                                }
+                            }
                         }
                     }
                 }
