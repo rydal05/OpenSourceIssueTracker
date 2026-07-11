@@ -6,13 +6,16 @@ import Sidebar from "./sidebar";
 
 {/* name, desc, open issues, PRs, tags, topics, language */}
 export interface Repository {
+  owner: string,
   name: string,
   desc: string,
   totalIssues: number,
   totalPRs: number,
   tags: Array<string>,
   topics: Array<string>,
-  languages: Array<string>
+  languages: Array<string>,
+  archived: boolean
+  stars: number,
 }
 
 const defaultRepo: Repository = {
@@ -20,9 +23,12 @@ const defaultRepo: Repository = {
   desc: "Loading...",
   totalIssues: -1,
   totalPRs: -1,
+  stars: -1,
   tags: [],
   topics: [],
-  languages: []
+  languages: [],
+  archived: false,
+  owner: "NIL"
 };
 
 export default function Home() {

@@ -14,10 +14,6 @@ export async function getPopularRepos() {
                         url
                         isArchived
 
-                        primaryLanguage {
-                            name 
-                        }
-
                         languages(first: 3, orderBy: {field: SIZE, direction: DESC}) {
                             nodes {
                                 name
