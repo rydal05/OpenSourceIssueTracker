@@ -45,7 +45,6 @@ export default function Home() {
   // call github api here to fill repos array
   useEffect(() => {
     getPopularRepos().then((res) => {
-      console.log(res);
       setRepoList(res);
       setCurRepo(res[0]);
     });
