@@ -1,3 +1,4 @@
+import { Repository } from "./page";
 
 const GRAPHQL_URL = 'https://api.github.com/graphql'
 
@@ -60,6 +61,6 @@ export async function getPopularRepos() {
     }
 
     const json = await response.json();
-    return json.data.search.edges.map((edge: { node: any; }) => edge.node);
+    return json.data.search.edges.map((edge: { node: Repository; }) => edge.node);
 }
 
