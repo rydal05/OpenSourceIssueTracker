@@ -13,9 +13,6 @@ async function test() {
     } catch (error) {
         console.error("Error fetching popular repos: ", error);
     }
-
-
-      
 }
 
 test();

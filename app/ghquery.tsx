@@ -1,7 +1,11 @@
 import { error } from "console";
 import { Repository } from "./page";
 
-const GRAPHQL_URL = 'https://api.github.com/graphql'
+const GRAPHQL_URL = 'https://api.github.com/graphql';
+
+var allReposArr;
+
+allReposArr
 
 export async function getRepoVerbose(repoId: string) {
     console.log("token check: ", process.env.NEXT_PUBLIC_GH_ACCESS_TOKEN);

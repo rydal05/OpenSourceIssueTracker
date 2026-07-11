@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import RepoView from "./repoview";
 import Sidebar from "./sidebar";
 import { getPopularRepos } from "./ghquery";
-
+import GitHubMarkDown from "./markdownviewer"
 {/* name, desc, open issues, PRs, tags, topics, language */}
 export interface Repository {
   owner: string,
@@ -69,6 +69,9 @@ export default function Home() {
 
       {/* project view */}
       <RepoView curRepo={curRepo}/>
+
+      {/* markdown viewer on the side */}
+      
     </div>
   );
 }
