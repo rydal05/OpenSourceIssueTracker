@@ -1,17 +1,22 @@
+import SidebarEntry from "./components/sidebarentry";
 import { Repository } from "./page";
 
 export default function Sidebar({repoList, setCurRepo}: 
         {repoList: Array<Repository>, setCurRepo: React.Dispatch<React.SetStateAction<Repository>>}) {
 
     return (
-      <main className="flex flex-1 w-sm flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
+      <div className="flex flex-1 w-sm text-lg flex-col items-center py-9 px-8 bg-white dark:bg-black sm:items-start">
 
-        {repoList.map((repo) => {
-          console.log(repo);
-          console.log(repo.nameWithOwner);
-          return <p key={repo.url}>{repo.nameWithOwner}</p>
-        })}
+        <SidebarEntry title="👋 For You"/>
+        <SidebarEntry title="⏰ Recent"/>
+        <SidebarEntry title="⭐ Starred"/>
 
-      </main>
+        <h4 className="pt-5 pb-2">Repositories: </h4>
+        <div className="ps-2">
+          {repoList.map((repo) => 
+            <SidebarEntry title={repo.nameWithOwner} key={repo.url}/>
+          )}
+        </div>
+      </div>
     );
 }

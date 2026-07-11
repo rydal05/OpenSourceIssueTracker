@@ -9,7 +9,7 @@ import { getPopularRepos } from "./ghquery";
 export interface Repository {
   owner: string,
   nameWithOwner: string,
-  desc: string,
+  description: string,
   url: string,
   totalIssues: number,
   totalPRs: number,
@@ -23,7 +23,7 @@ export interface Repository {
 
 const defaultRepo: Repository = {
   nameWithOwner: "Loading...",
-  desc: "Loading...",
+  description: "Loading...",
   url: "google.com",
   totalIssues: -1,
   totalPRs: -1,
