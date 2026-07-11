@@ -108,13 +108,6 @@ export default function Home() {
       {/* sidebar */}
       <Sidebar setCurRepo={setCurRepo} repoList={filteredRepos}/>
 
-<<<<<<< HEAD
-      {/* project view */}
-      <RepoView curRepo={curRepo}/>
-
-      {/* markdown viewer on the side */}
-      
-=======
       <div className="mx-5">
         <div className="">
           <input 
@@ -127,7 +120,6 @@ export default function Home() {
         {/* project view */}
         <RepoView curRepo={curRepo}/>
       </div>
->>>>>>> 437018c3414f079d9da23e5b12edf73f9e6ebbe2
     </div>
   );
 }
