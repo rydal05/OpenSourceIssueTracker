@@ -16,6 +16,17 @@ export async function getRepoVerbose(repoId: string) {
                     stargazerCount
                     url
 
+                    pullRequests(first: 50, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
+                        totalCount
+                        nodes {
+                            id
+                            title
+                            number
+                            url
+                            createdAt
+                        }
+                    }
+
                     issues(first:50, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
                         totalCount
                         nodes {
@@ -26,8 +37,7 @@ export async function getRepoVerbose(repoId: string) {
                             createdAt
                         }
                     }
-                    
-                    
+                        
                     languages(first: 3, orderBy: {field: SIZE, direction: DESC}) {
                         nodes {
                             name
@@ -46,18 +56,18 @@ export async function getRepoVerbose(repoId: string) {
         },
         body: JSON.stringify({
             query,
-            variables: {repoId}
+            variables: { repoId }
         }),
     });
 
-    if(!response.ok){
+    if (!response.ok) {
         throw new Error('Failed to fetch repo data');
     }
 
     const json = await response.json();
     const repo = json.data?.node;
 
-    if(!repo){
+    if (!repo) {
         throw new Error('Repo ID malformed')
     }
 
@@ -69,6 +79,8 @@ export async function getRepoVerbose(repoId: string) {
         url: repo.url,
         totalIssuesCount: repo.issues.totalCount,
         recentIssues: repo.issues.nodes,
+        totalPRsCount: repo.pullRequests.totalCount,
+        recentPRs: repo.pullRequests.nodes,
     };
 }
 
@@ -87,7 +99,10 @@ export async function getPopularRepos() {
                         description
                         url
                         isArchived
-
+                        
+                        defaultBranchRef{
+                            name
+                        }
                         
                         languages(first: 3, orderBy: {field: SIZE, direction: DESC}) {
                             nodes {

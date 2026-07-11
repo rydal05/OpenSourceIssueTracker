@@ -21,7 +21,10 @@ export interface Repository {
   stars: number,
   repositoryTopics: {
     nodes: Array<Topic>
-  }
+  },
+  defaultBranchRef: {
+    name: string
+  },
 }
 
 export interface Topic {
@@ -49,7 +52,10 @@ const defaultRepo: Repository = {
   owner: "NIL",
   repositoryTopics: {
     nodes: []
-  }
+  },
+  defaultBranchRef: {
+    name: "main"
+  },
 };
 
 export default function Home() {
@@ -118,8 +124,9 @@ export default function Home() {
         </div>
 
         {/* project view */}
-        <RepoView curRepo={curRepo}/>
+        <RepoView curRepo={curRepo}/>        
       </div>
+      <GitHubMarkDown curRepo={curRepo}/>
     </div>
   );
 }
