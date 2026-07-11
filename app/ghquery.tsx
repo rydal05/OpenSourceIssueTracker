@@ -2,7 +2,7 @@
 const GRAPHQL_URL = 'https://api.github.com/graphql'
 
 export async function getPopularRepos() {
-    console.log("token check: ", process.env.GH_ACCESS_TOKEN);
+    console.log("token check: ", process.env.NEXT_PUBLIC_GH_ACCESS_TOKEN);
 
     const query = `
         query getPopularRepos {
@@ -47,7 +47,7 @@ export async function getPopularRepos() {
     const response = await fetch(GRAPHQL_URL, {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${process.env.GH_ACCESS_TOKEN}`,
+            'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GH_ACCESS_TOKEN}`,
             'Content-Type': 'application/json',
         },
 
