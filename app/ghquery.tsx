@@ -83,7 +83,11 @@ export async function getPopularRepos() {
 
     const query = `
         query getPopularRepos {
+<<<<<<< HEAD
         search(query: "stars:>10000 sort:stars-desc pushed:>=2026-06-01 archived:false is:public", type: REPOSITORY, first:50) {
+=======
+        search(query: "stars:>10000 sort:stars-desc", type: REPOSITORY, first:50) {
+>>>>>>> ab161a34207ba9585a27d7cfd7e8356af09bf34a
             edges {
                 node {
                     ... on Repository {
