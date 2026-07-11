@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Repository } from "./page";
+import InlinePill from "./components/inlinePill";
 
 export default function RepoView({ curRepo }: { curRepo: Repository }) {
     const [activeSection, setActiveSection] = useState<string | null>(null);
@@ -17,12 +18,16 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
             </a>
             <h2 className="mb-2 mt-1 italic" >{curRepo.description}</h2>
 
+            <div className="flex flex-row flex-wrap gap-y-2 pb-2">
+                {curRepo.languages.nodes.map((l) => 
+                    <InlinePill text={l.name} key={l.name}/>
+                )}
+            </div>
+
             <div className="flex flex-row flex-wrap gap-y-2">
-                {curRepo.repositoryTopics.nodes.map((t) => {
-                    return <div className="w-fit px-3 py-1 me-2 border-accent-light border-1 rounded-3xl" key={t.topic.name}>
-                        {t.topic.name}
-                    </div>
-                })}
+                {curRepo.repositoryTopics.nodes.map((t) => 
+                    <InlinePill text={t.topic.name} key={t.topic.name}/>
+                )}
             </div>
 
             <div className="flex flex-row justify-between pt-6 text-slate-500 border-b-1 border-slate-300 pb-1">

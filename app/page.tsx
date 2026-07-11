@@ -13,7 +13,9 @@ export interface Repository {
   url: string,
   totalIssues: number,
   totalPRs: number,
-  languages: Array<string>,
+  languages: {
+    nodes: Array<Langauge>
+  }
   archived: boolean
   stars: number,
   repositoryTopics: {
@@ -27,6 +29,10 @@ export interface Topic {
   }
 }
 
+export interface Langauge {
+  name: string
+}
+
 const defaultRepo: Repository = {
   nameWithOwner: "Loading...",
   description: "Loading...",
@@ -34,7 +40,9 @@ const defaultRepo: Repository = {
   totalIssues: -1,
   totalPRs: -1,
   stars: -1,
-  languages: [],
+  languages: {
+    nodes: []
+  },
   archived: false,
   owner: "NIL",
   repositoryTopics: {
