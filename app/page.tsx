@@ -37,9 +37,7 @@ const defaultRepo: Repository = {
 };
 
 export default function Home() {
-  // make it a useMemo?
   const [repoList, setRepoList] = useState([defaultRepo]);
-
   const [curRepo, setCurRepo] = useState(defaultRepo);
 
   // call github api here to fill repos array
