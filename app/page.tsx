@@ -7,6 +7,7 @@ import { getPopularRepos } from "./ghquery";
 
 {/* name, desc, open issues, PRs, tags, topics, language */}
 export interface Repository {
+  id: string,
   owner: string,
   nameWithOwner: string,
   description: string,
@@ -34,6 +35,7 @@ export interface Langauge {
 }
 
 const defaultRepo: Repository = {
+  id: "",
   nameWithOwner: "Loading...",
   description: "Loading...",
   url: "google.com",
