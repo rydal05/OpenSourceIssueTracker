@@ -38,21 +38,20 @@ const defaultRepo: Repository = {
 
 export default function Home() {
   // make it a useMemo?
-  const [repoList, setRepoList] = useState([]);
+  const [repoList, setRepoList] = useState([defaultRepo]);
 
   const [curRepo, setCurRepo] = useState(defaultRepo);
 
   // call github api here to fill repos array
   useEffect(() => {
     getPopularRepos().then((res) => {
-      console.log(res);
       setRepoList(res);
       setCurRepo(res[0]);
     });
   }, [setRepoList, setCurRepo])
   
   return (
-    <div className="flex flex-col flex-1 bg-zinc-50 font-sans dark:bg-black">
+    <div className="flex flex-row flex-1 bg-zinc-50 font-sans dark:bg-black">
       {/* sidebar */}
       <Sidebar setCurRepo={setCurRepo} repoList={repoList}/>
 
