@@ -1,36 +1,26 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# FREEIRA (working title)
 
-## Getting Started
+## A new entrypoint for the lost newbie deveoper
+Intermediate level developers want to contribute to open source but don't know where or how to begin and have no one to hold their hand. It might seem daunting to figure out what to do, and most often, developers get lost in tutorial hell. Trying to claw their way out of the pits of the lost intermediate.
 
-First, run the development server:
+So we have created a web app that aggregates popular open source repos that allow anyone to make contributions to projects that are tailored to the end user.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+# FREEIRA
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Features
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- Automatic aggregation of popular/large open source repos that list things like issues and PRs
+- Category searching for primary language, any big organizations, and maybe even what they're tackling (graphics for example)
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Account integration with github:
+- new users can fill out a short form/questionnaire (or chat with a chatgpt wrapper) on account linkage/creation that allows them to use gemini or whatever AI LLM whatever to suggest some starter repos to follow
+- users can save specific repos they want to keep up to date on
+- users can submit their own repos to a database of they are looking for help or open source contribution (accounts have 24 hour submission limit or something idk)
+- users can also import open source repos to their specific user (not submissions to the database) so they can track issues that aren't already found in the database 
 
-## Learn More
+### Project Scope 
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Hardcoded starter seed repo list (MAYBE we can use github rest api to fetch popular ones in addition who knows goes)
+2. Github oauth login (starring projects through the app stars them on their account in github)
+3. LLM chatbot feature to find projects 
+4. save/follow repos
