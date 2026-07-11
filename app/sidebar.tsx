@@ -12,7 +12,7 @@ export default function Sidebar({repoList, setCurRepo}:
 
           <h4 className="pt-5 pb-2 font-semibold">Repositories: </h4>
 
-          <div className="ps-2">
+          <div className="ps-2 flex flex-col overflow-scroll h-190">
             {repoList.map((repo) => 
               <SidebarEntry title={repo.nameWithOwner} key={repo.url} func={() => {setCurRepo(repo)}}/>
             )}

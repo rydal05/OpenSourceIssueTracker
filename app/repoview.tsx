@@ -11,7 +11,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
     };
 
     return (
-        <div className="mx-5 my-15 text-lg max-w-5xl">
+        <div className="mx-5 my-15 text-lg w-5xl">
             <a href={curRepo.url} target="_blank" rel="noopener noreferrer" className="text-5xl font-semibold">
                 {curRepo.nameWithOwner}
             </a>

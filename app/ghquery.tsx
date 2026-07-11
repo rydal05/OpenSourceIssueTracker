@@ -83,7 +83,7 @@ export async function getPopularRepos() {
 
     const query = `
         query getPopularRepos {
-        search(query: "stars:>10000 sort:stars-desc", type: REPOSITORY, first:10) {
+        search(query: "stars:>10000 sort:stars-desc", type: REPOSITORY, first:50) {
             edges {
                 node {
                     ... on Repository {
