@@ -53,7 +53,7 @@ const defaultRepo: Repository = {
 export default function Home() {
   const [repoList, setRepoList] = useState([defaultRepo]);
   const [curRepo, setCurRepo] = useState(defaultRepo);
-  const [searchTerms, setSearch] = useState([""]);
+  const [rawSearch, setRawSearch] = useState("");
 
   // call github api here to fill repos array
   useEffect(() => {
@@ -97,15 +97,27 @@ export default function Home() {
     return true;
   }
 
+  const searchTerms = useMemo(() => rawSearch.split(" "), [rawSearch]);
+
   const filteredRepos = useMemo(() => repoList.filter(searchFilter), [repoList, searchTerms]);
   
   return (
     <div className="flex flex-row flex-1 bg-zinc-50 font-sans dark:bg-black">
       {/* sidebar */}
-      <Sidebar setCurRepo={setCurRepo} repoList={filteredRepos} setSearch={setSearch}/>
+      <Sidebar setCurRepo={setCurRepo} repoList={filteredRepos}/>
 
-      {/* project view */}
-      <RepoView curRepo={curRepo}/>
+      <div className="mx-5">
+        <div className="">
+          <input 
+              placeholder="Search:" 
+              className="mt-8 px-2 py-1 w-md rounded-lg border-1"
+              onChange={e => setRawSearch(e.target.value)}
+          />
+        </div>
+
+        {/* project view */}
+        <RepoView curRepo={curRepo}/>
+      </div>
     </div>
   );
 }
