@@ -3,10 +3,6 @@ import { Repository } from "./page";
 
 const GRAPHQL_URL = 'https://api.github.com/graphql';
 
-var allReposArr;
-
-allReposArr
-
 export async function getRepoVerbose(repoId: string) {
     console.log("token check: ", process.env.NEXT_PUBLIC_GH_ACCESS_TOKEN);
 
@@ -20,12 +16,8 @@ export async function getRepoVerbose(repoId: string) {
                     stargazerCount
                     url
 
-                    issues(first:100, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
+                    issues(first:50, states: OPEN, orderBy: {field: CREATED_AT, direction: DESC}) {
                         totalCount
-                        pageInfo {
-                            endCursor
-                            hasNextPage
-                        }
                         nodes {
                             id
                             title
@@ -46,7 +38,7 @@ export async function getRepoVerbose(repoId: string) {
             }
         }  
     `;
-    const response = await fetch('https://github.com', {
+    const response = await fetch(GRAPHQL_URL, {
         method: 'POST',
         headers: {
             'Authorization': `Bearer ${process.env.NEXT_PUBLIC_GH_ACCESS_TOKEN}`,
@@ -77,8 +69,6 @@ export async function getRepoVerbose(repoId: string) {
         url: repo.url,
         totalIssuesCount: repo.issues.totalCount,
         recentIssues: repo.issues.nodes,
-        hasNextIssuesPage: repo.issues.pageinfo.hasNextPage,
-        issuesCursor: repo.issues.pageInfo.endCursor
     };
 }
 
