@@ -1,14 +1,11 @@
 import SidebarEntry from "./components/sidebarentry";
 import { Repository } from "./page";
 
-interface SideBarProps {
-  repoList: Array<Repository>, 
-  setCurRepo: React.Dispatch<React.SetStateAction<Repository>>, 
-}
-
-export default function Sidebar({repoList, setCurRepo}: SideBarProps){
+export default function Sidebar({repoList, setCurRepo}: 
+        {repoList: Array<Repository>, setCurRepo: React.Dispatch<React.SetStateAction<Repository>>}) {
     return (
       <div className="flex-none w-sm text-lg items-center py-16 mx-2 px-5 bg-white dark:bg-black sm:items-start">
+        <p style={{ fontSize: '28px', justifyContent: 'center', margin: '5px'}} >🖥️ Freeira</p>
         <div className="flex flex-col">
           <SidebarEntry title="👋 For You"/>
           <SidebarEntry title="⏰ Recent"/>
