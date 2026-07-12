@@ -92,7 +92,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
             </div>
 
             {activeSection === "Issues" && (
-                <div className="grid grid-cols-3 gap-6 overflow-scroll h-220">
+                <div className="grid grid-cols-3 gap-6 overflow-scroll h-200">
                     {repoDetails.recentIssues.map((issue) => {
                         const createdDate = new Date(issue.createdAt);
                         return (<a key={issue.number} href={issue.url} className="border-1 rounded-md px-5 py-2">
@@ -106,7 +106,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
             )}
 
             {activeSection === "PRs" && (
-                <div className="grid grid-cols-3 gap-6 overflow-scroll h-220">
+                <div className="grid grid-cols-3 gap-6 overflow-scroll h-200">
                     {repoDetails.recentPRs.map((pr) => {
                         const createdDate = new Date(pr.createdAt);
                         return (<a key={pr.number} href={pr.url} className="border-1 rounded-md px-5 py-2">
