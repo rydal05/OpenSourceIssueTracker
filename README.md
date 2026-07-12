@@ -23,5 +23,7 @@ So we have created a web app that aggregates popular open source repos that allo
 3. LLM chatbot feature to find projects 
 4. save/follow repos
 
-### Demo Video
-Demo of the project is viewable [here](https://youtu.be/zB7AYFokeWQ?si=2xfSKD9YnrQF2cmp). This was entered into the KnightHacks 2026 hackathon, [BloomKnights](https://bloomknights.devpost.com/). The devpost is viewable [here](https://devpost.com/software/freeira).
+### Demo Video & Other
+Demo of the project is viewable [here](https://youtu.be/zB7AYFokeWQ?si=2xfSKD9YnrQF2cmp).
+This was entered into the KnightHacks 2026 hackathon, [BloomKnights](https://bloomknights.devpost.com/).
+The devpost is viewable [here](https://devpost.com/software/freeira).
