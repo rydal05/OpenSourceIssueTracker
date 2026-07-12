@@ -8,6 +8,8 @@ export interface DetailedRepo {
     id: string,
     totalIssuesCount: number,
     recentIssues: Array<Issue>,
+    totalPRsCount: number,
+    recentPRs: Array<PR>
 }
 
 export interface Issue {
@@ -15,11 +17,27 @@ export interface Issue {
     title: string,
     number: number,
     url: string,
-    createdAt: string 
+    createdAt: string
+}
+
+export interface PR {
+    id: string,
+    title: string,
+    number: number,
+    url: string,
+    createdAt: string
 }
 
 const placeholderIssue: Issue = {
-    id: "Loaddin..",
+    id: "Loading..",
+    title: "Loading...",
+    number: -1,
+    url: "google.com",
+    createdAt: ""
+}
+
+const placeholderPR: PR = {
+    id: "Loading..",
     title: "Loading...",
     number: -1,
     url: "google.com",
@@ -29,16 +47,18 @@ const placeholderIssue: Issue = {
 const placeholder: DetailedRepo = {
     id: "Loading...",
     totalIssuesCount: -1,
+    totalPRsCount: -1,
     recentIssues: [placeholderIssue],
+    recentPRs: [placeholderPR],
 }
 
 export default function RepoView({ curRepo }: { curRepo: Repository }) {
     const [activeSection, setActiveSection] = useState<string | null>("Issues");
     const [repoDetails, setRepoDetails] = useState(placeholder);
-    
+
     useEffect(() => {
         setRepoDetails(placeholder);
-        if(curRepo.id != "")
+        if (curRepo.id != "")
             getRepoVerbose(curRepo.id).then((res) => setRepoDetails(res));
     }, [setRepoDetails, curRepo])
 
@@ -48,27 +68,27 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
 
     return (
         <div className="my-8 text-lg w-5xl">
-            <a href={curRepo.url} target="_blank" rel="noopener noreferrer" className="text-5xl font-semibold">
+            <p className="text-5xl font-semibold">
                 {curRepo.nameWithOwner}
-            </a>
+            </p>
             <h2 className="mb-2 mt-1 italic" >{curRepo.description}</h2>
 
             <div className="flex flex-row flex-wrap gap-y-2 py-2">
-                {curRepo.languages.nodes.map((l) => 
-                    <InlinePill text={l.name} key={l.name}/>
+                {curRepo.languages.nodes.map((l) =>
+                    <InlinePill text={l.name} key={l.name} />
                 )}
             </div>
 
             <div className="flex flex-row flex-wrap gap-y-2">
-                {curRepo.repositoryTopics.nodes.map((t) => 
-                    <InlinePill text={t.topic.name} key={t.topic.name}/>
+                {curRepo.repositoryTopics.nodes.map((t) =>
+                    <InlinePill text={t.topic.name} key={t.topic.name} />
                 )}
             </div>
 
             <div className="flex flex-row justify-between pt-6 text-slate-500 border-b-1 border-slate-300 pb-1 mb-6">
                 <button className="cursor-pointer" onClick={() => openSection("Issues")}>View Issues ⏷</button>
-                <button onClick={() => openSection("PRs")}>View PRs ⏷</button>
-                <button onClick={() => openSection("Codebase")}>View Codebase ⏷</button>
+                <button className="cursor-pointer" onClick={() => openSection("PRs")}>View PRs ⏷</button>
+                <a href={curRepo.url}>View Codebase 🔗</a>
             </div>
 
             {activeSection === "Issues" && (
@@ -78,7 +98,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
                         return (<a key={issue.number} href={issue.url} className="border-1 rounded-md px-5 py-2">
                             <h3 className="">{issue.title}</h3>
                             <div className="pt-2 pb-1">
-                                <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`}/>
+                                <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`} />
                             </div>
                         </a>)
                     })}
@@ -86,8 +106,16 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
             )}
 
             {activeSection === "PRs" && (
-                <div className="section">
-
+                <div className="grid grid-cols-3 gap-6 overflow-scroll h-220">
+                    {repoDetails.recentPRs.map((pr) => {
+                        const createdDate = new Date(pr.createdAt);
+                        return (<a key={pr.number} href={pr.url} className="border-1 rounded-md px-5 py-2">
+                            <h3 className="">{pr.title}</h3>
+                            <div className="pt-2 pb-1">
+                                <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`} />
+                            </div>
+                        </a>)
+                    })}
                 </div>
             )}
 
