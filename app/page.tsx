@@ -6,6 +6,7 @@ import Sidebar from "./sidebar";
 import { getPopularRepos } from "./ghquery";
 import GitHubMarkDown from "./markdownviewer"
 import Intro from "./intro";
+import GeminiWindow from "./geminiWindow";
 {/* name, desc, open issues, PRs, tags, topics, language */}
 export interface Repository {
   id: string,
@@ -109,6 +110,8 @@ export default function Home() {
   const searchTerms = useMemo(() => rawSearch.split(" "), [rawSearch]);
 
   const filteredRepos = useMemo(() => repoList.filter(searchFilter), [repoList, searchTerms]);
+
+  const [geminiResult, setGeminiResult] = useState("");
   
   return (
     <div className="flex flex-row flex-1 bg-zinc-50 font-sans dark:bg-black">
@@ -130,8 +133,11 @@ export default function Home() {
         <RepoView curRepo={curRepo}/>        
       </div>
 
-      <div className="border-1 rounded-3xl mx-3 my-20 p-3 overflow-hidden h-250">
-        <GitHubMarkDown curRepo={curRepo}/>
+      <div className="flex flex-col">
+        <div className="border-1 rounded-3xl mx-3 mt-11 p-3 overflow-hidden h-220">
+          <GitHubMarkDown curRepo={curRepo}/>
+        </div>
+        <GeminiWindow geminiResult={geminiResult}/>
       </div>
     </div>
   );
