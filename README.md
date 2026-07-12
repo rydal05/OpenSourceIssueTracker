@@ -1,11 +1,9 @@
-# FREEIRA (working title)
+# FREEIRA
 
-## A new entrypoint for the lost newbie deveoper
+## An Entrypoint for the Lost Intermediate Developer
 Intermediate level developers want to contribute to open source but don't know where or how to begin and have no one to hold their hand. It might seem daunting to figure out what to do, and most often, developers get lost in tutorial hell. Trying to claw their way out of the pits of the lost intermediate.
 
 So we have created a web app that aggregates popular open source repos that allow anyone to make contributions to projects that are tailored to the end user.
-
-# FREEIRA
 
 ## Features
 
@@ -20,9 +18,10 @@ So we have created a web app that aggregates popular open source repos that allo
 
 ### Project Scope 
 
-1. Hardcoded starter seed repo list (MAYBE we can use github rest api to fetch popular ones in addition who knows goes)
+1. GitHub GraphQL to fetch repos in batch & individualized comprehensive statistics (including but not limited to issues+PRs, repo tags, language usage, isses & PR gaps, etc)
 2. Github oauth login (starring projects through the app stars them on their account in github)
 3. LLM chatbot feature to find projects 
 4. save/follow repos
 
-![Design is modeled after Jira](https://images.ctfassets.net/zsv3d0ugroxu/2umofziJhIf3zcHVQjDbTi/86232e7d8050e298ebb500291871a518/Jira_-_feature_overview_-_Jira_only.png)
+### Demo Video
+Demo of the project is viewable [here](https://youtu.be/zB7AYFokeWQ?si=2xfSKD9YnrQF2cmp). This was entered into the KnightHacks 2026 hackathon, [BloomKnights](https://bloomknights.devpost.com/). The devpost is viewable [here](https://devpost.com/software/freeira).
