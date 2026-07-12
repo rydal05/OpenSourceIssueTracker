@@ -5,6 +5,7 @@ import RepoView from "./repoview";
 import Sidebar from "./sidebar";
 import { getPopularRepos } from "./ghquery";
 import GitHubMarkDown from "./markdownviewer"
+import Intro from "./intro";
 {/* name, desc, open issues, PRs, tags, topics, language */}
 export interface Repository {
   id: string,
@@ -111,6 +112,8 @@ export default function Home() {
   
   return (
     <div className="flex flex-row flex-1 bg-zinc-50 font-sans dark:bg-black">
+      <Intro setRawSearch={setRawSearch}/>
+
       {/* sidebar */}
       <Sidebar setCurRepo={setCurRepo} repoList={filteredRepos}/>
 
