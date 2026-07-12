@@ -95,7 +95,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
                 <div className="grid grid-cols-3 gap-6 overflow-scroll h-200">
                     {repoDetails.recentIssues.map((issue) => {
                         const createdDate = new Date(issue.createdAt);
-                        return (<a key={issue.number} href={issue.url} className="border-1 rounded-md px-5 py-2">
+                        return (<a key={issue.number} href={issue.url} className="border-1 rounded-md px-5 py-2 h-fit">
                             <h3 className="">{issue.title}</h3>
                             <div className="pt-2 pb-1">
                                 <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`} />
@@ -109,7 +109,7 @@ export default function RepoView({ curRepo }: { curRepo: Repository }) {
                 <div className="grid grid-cols-3 gap-6 overflow-scroll h-200">
                     {repoDetails.recentPRs.map((pr) => {
                         const createdDate = new Date(pr.createdAt);
-                        return (<a key={pr.number} href={pr.url} className="border-1 rounded-md px-5 py-2">
+                        return (<a key={pr.number} href={pr.url} className="border-1 rounded-md px-5 py-2 h-fit">
                             <h3 className="">{pr.title}</h3>
                             <div className="pt-2 pb-1">
                                 <InlinePill text={`${createdDate.getFullYear()}-${createdDate.getMonth()}-${createdDate.getDate()}`} />
